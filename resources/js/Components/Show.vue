@@ -10,6 +10,7 @@
         <table class="table table-hover">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Brand</th>
         <th>Year</th>
         <th>Status</th>
@@ -49,7 +50,7 @@ export default {
       await axios.get('vehicles')
         .then(response => {
           this.vehicles=response.data
-          console.log(response.data);
+          // console.log(response.data);
         })    
         .catch(error => {
           console.error('Error al obtener datos:', error);

@@ -22,8 +22,11 @@ class VehiclesController extends Controller
      */
     public function index()
     {
-        $vehicles = MyFirstModel::all();
-        return response()->json($vehicles);
+        // $vehicles = MyFirstModel::all();
+        // return response()->json($vehicles);
+
+        $vehicles = Vehicle::with("client")->orderBy('year', 'DESC')->get();
+    return response()->json($vehicles);
     }
 
     /**

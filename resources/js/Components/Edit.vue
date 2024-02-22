@@ -8,14 +8,14 @@
                         <form @submit.prevent="edit">
                             <div class="row">
                                 <div class="form-group">
-                                    <label>Brand</label>
+                                    <label for="brand">Brand</label>
                                     <input type="text" class="form-control" v-model="vehicle.brand">
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" id="floatingTextarea" v-model="vehicle.year"></textarea>
-                                    <label for="floatingTextarea">Year</label>
+                                    <textarea class="form-control" v-model="vehicle.year"></textarea>
+                                    <label for="year">Year</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -48,7 +48,7 @@ export default {
     methods: {
         async showVehicle() {
             try {
-                const response = await axios.get(`vehicles/${this.$route.params.id}`);
+                const response = await axios.get(`vehicles/${this.$route.params.id}`)
                 const { brand, year } = response.data;
                 this.vehicle.brand = brand;
                 this.vehicle.year = year;
