@@ -20,11 +20,8 @@ class VehiclesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // $vehicles = MyFirstModel::all();
-        // return response()->json($vehicles);
-
         $vehicles = Vehicle::with("client")->orderBy('year', 'DESC')->get();
     return response()->json($vehicles);
     }
@@ -75,7 +72,8 @@ class VehiclesController extends Controller
      */
     public function show($id)
     {
-        Log::info("mensaje");
+        $vehicle = Vehicle::findOrFail($id);
+        return response()->json($vehicle);
     }
 
     /**
@@ -86,8 +84,8 @@ class VehiclesController extends Controller
      */
     public function edit($id)
     {
-        // $vehicle = Vehicle::findOrFail($id);
-        // return response()->json($vehicle);
+        dd("hola");
+        
     }
 
     /**
@@ -114,18 +112,25 @@ class VehiclesController extends Controller
     public function destroy($id)
     {
         try {
-            // Busca el vehículo por su ID
             $vehicle = Vehicle::findOrFail($id);
-
-            // Elimina el vehículo de la base de datos
             $vehicle->delete();
-
-            // Retorna una respuesta exitosa
             return response()->json(['message' => 'Vehículo eliminado exitosamente'], 200);
-        } catch (\Exception $e) {
-            // Si ocurre algún error, retorna una respuesta de error
-            return response()->json(['message' => 'Error al eliminar el vehículo', 'error' => $e->getMessage()], 500);
-        }
+                } catch (\Exception $e) {
+                    return response()->json(['message' => 'Error al eliminar el vehículo', 'error' => $e->getMessage()], 500);
+                }
     }
+
+    public function search(Request $request)
+{
+    $searchTerm = $request->get('q');
+
+    $vehicles = Vehicle::where('name', 'like', "%$searchTerm%")
+                        ->orWhere('brand', 'like', "%$searchTerm%")
+                        ->orWhere('model', 'like', "%$searchTerm%")
+                        ->get();
+
+    return view('vehicles.index', compact('vehicles'));
+}
+    
     
 }

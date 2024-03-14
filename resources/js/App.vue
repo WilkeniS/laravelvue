@@ -21,9 +21,9 @@
           <router-link exact-active-class="active" to="/clients" class="nav-link active" aria-current="page">Clients</router-link>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form class="d-flex" role="search" method="GET">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+        <button class="btn btn-outline-light" type="submit" >Search</button>
       </form>
     </div>
   </div>
@@ -39,26 +39,22 @@ import axios from 'axios';
 
 export default {
   data() {
-    return {
-      //vehicles: []
+    return{
+    search:''
     }
   },
   methods: {
-    // fetchDataFromDatabase() {
-    //   axios.get('vehicles')
-    //     .then(response => {
-    //       this.vehicles=response.data
-    //       console.log(response.data);
-    //     })
-    //     .catch(error => {
-    //       console.error('Error al obtener datos:', error);
-    //     });
-    // },
-  },
-  created(){
-    //this.fetchDataFromDatabase()
+    findVehicle(){
+      this.$inertia.get('/vehicles?search=', this.search)
+        .then(response => {
+          this.vehicles = response.data;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
   }
-}
+};
 </script>
 <style>
 </style>

@@ -12,6 +12,7 @@ class Vehicle extends Model
     protected $table = 'vehicles';
     public $timestamps = false;         
     protected $fillable = ['brand'];
+    protected $primary_key="id";
 
     public function client()
     {

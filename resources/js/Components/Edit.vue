@@ -49,12 +49,14 @@ export default {
         async showVehicle() {
             try {
                 const response = await axios.get(`vehicles/${this.$route.params.id}`)
+                console.log(response)
                 const { brand, year } = response.data;
                 this.vehicle.brand = brand;
                 this.vehicle.year = year;
             } catch (error) {
                 console.error("Error fetching vehicle data:", error);
             }
+            console.log(JSON.stringify(this.$route.params.vehicle))
         },
         async edit() {
             try {
