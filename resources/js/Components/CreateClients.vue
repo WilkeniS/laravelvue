@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="card" style="width: 18rem;">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="card" style="width: 50%;">
                     <div class="card-body">
                         <h5 class="card-title">Agregar Clientes</h5>
                         <form @submit.prevent="create">
@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
     name: "CreateClients",
@@ -44,19 +45,25 @@ export default {
         };
     },
     methods: {
-    async create() {
-        const response = await axios.post('clients', this.client);
-        // Verificar si la solicitud POST fue exitosa (código de estado HTTP 2xx)
-        if (response.status >= 200 && response.status < 300) {
-            // Redirigir a la página "clients" después de que se haya creado el vehículo
-            this.$router.push({ name: "showClients" });
-        } else {
-            // Manejar cualquier otro código de estado HTTP aquí
-            console.error('Error en la solicitud POST:', response.statusText);
+        async create() {
+            try {
+                const response = await axios.post('/clients', this.client);
+                if (response.status >= 200 && response.status < 300) {
+                    // Redirige a la página "showClients" si la solicitud es exitosa
+                    this.$router.push({ name: "showClients" });
+                } else {
+                    throw new Error('Error in POST request');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Muestra una alerta de error si ocurre algún error en la solicitud
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            }
         }
     }
-
-}
-
 };
 </script>

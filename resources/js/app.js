@@ -1,25 +1,16 @@
-import { createApp } from 'vue';
 import App from './App.vue';
-import axios from 'axios';
-import {createWebHistory, createRouter} from 'vue-router';
-import { routes } from './routes';
-
-const Vue = createApp(App);
-
-const router = new createRouter({
-    history: createWebHistory(), 
-    routes: routes
-});
-
-Vue.use(router);
+import './bootstrap';
+import { createApp } from 'vue';
+import router from "./routes.js";
+import swal from 'sweetalert';
 
 
-Vue.mount("#app");
 
-axios.defaults.baseURL="http://127.0.0.1:8000"
+// console.log(router)
+const app = createApp(App);
+app.use(router)
 
-// const app = new Vue ({
-//     el: '#app',
-//     router:router,
-//     render: h => h(App)
-// });
+import ExampleComponent from './components/ExampleComponent.vue';
+app.component('example-component', ExampleComponent);
+
+app.mount('#app');

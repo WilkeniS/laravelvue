@@ -6,3 +6,24 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// movil
+@media (max-width: 767px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+}
+
+// print
+@media print{
+  .hide{
+    display: none;
+  }
+}
+
+// table
+.button-cell{
+    width: 150px;
+}

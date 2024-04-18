@@ -1,6 +1,6 @@
 <template>
 <main>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary hide">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Dealer</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,16 +11,19 @@
         <li class="nav-item">
           <router-link exact-active-class="active" to="/" class="nav-link active" aria-current="page">Inicio</router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link exact-active-class="active" to="/create" class="nav-link active" aria-current="page">Create</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link exact-active-class="active" to="/edit/id" class="nav-link active" aria-current="page">Edit</router-link>
-        </li>
+        </li> -->
+        <!-- <li class="nav-item">
+          <router-link exact-active-class="active" to="/:id" class="nav-link active" aria-current="page">Edit</router-link>
+        </li> -->
         <li class="nav-item">
           <router-link exact-active-class="active" to="/clients" class="nav-link active" aria-current="page">Clients</router-link>
         </li>
       </ul>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+      </form>
       <form class="d-flex" role="search" method="GET">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light" type="submit" >Search</button>
@@ -34,27 +37,5 @@
 </main>
 </template>
 <script>
-
-import axios from 'axios';
-
-export default {
-  data() {
-    return{
-    search:''
-    }
-  },
-  methods: {
-    // findVehicle(){
-    //   this.$inertia.get('/vehicles?search=', this.search)
-    //     .then(response => {
-    //       this.vehicles = response.data;
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //     });
-    // }
-  }
-};
+    export default {}
 </script>
-<style>
-</style>

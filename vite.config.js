@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import Vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     plugins: [
-        Vue (),
         laravel({
             input: [
                 'resources/sass/app.scss',
@@ -12,5 +11,21 @@ export default defineConfig({
             ],
             refresh: true,
         }),
+        vue({
+            template: {
+                transformAssetUrls: {
+                    base: null,
+                    includeAbsolute: false,
+                },
+            },
+        }),
     ],
+    // css:{
+    //     postcss:{},
+    // },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm-bundler.js',
+        },
+    },
 });

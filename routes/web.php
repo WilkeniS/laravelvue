@@ -9,13 +9,11 @@ Route::get('/', function () {
 })
 ->name('application');
 
-// Route::get('/vehicles-list', function () {
-//     return view('list');
-// });
-
-
 Route::resource('/vehicles', VehiclesController::class);
+
+
+Route::get('/clients-list', [ClientsController::class, 'list']);
 Route::resource('/clients', ClientsController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Auth::routes();

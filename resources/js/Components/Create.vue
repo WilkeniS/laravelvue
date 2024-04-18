@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="card" style="width: 18rem;">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <div class="card" style="width: 50%;">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <form @submit.prevent="create">
@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
     name: "CreateVehicle",
@@ -44,19 +45,25 @@ export default {
         };
     },
     methods: {
-    async create() {
-        const response = await axios.post('vehicles', this.vehicle);
-        // Verificar si la solicitud POST fue exitosa (código de estado HTTP 2xx)
-        if (response.status >= 200 && response.status < 300) {
-            // Redirigir a la página "showVehicle" después de que se haya creado el vehículo
-            this.$router.push({ name: "showVehicle" });
-        } else {
-            // Manejar cualquier otro código de estado HTTP aquí
-            console.error('Error en la solicitud POST:', response.statusText);
+        async create() {
+            try {
+                const response = await axios.post('vehicles', this.vehicle);
+                if (response.status >= 200 && response.status < 300) {
+                    // Muestra una alerta de éxito
+                    this.$router.push({ name: "showVehicle" });
+                } else {
+                    throw new Error('Error in POST request');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Muestra una alerta de error
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                });
+            }
         }
     }
-
-}
-
 };
 </script>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
-// use App\Models\Vehicle;
+use App\Models\Vehicle;
 
 class ClientsController extends Controller
 {
@@ -14,9 +14,16 @@ class ClientsController extends Controller
      */
     public function index()
     {
+    //     $clients = Client::with("vehicle")->orderBy('id', 'DESC')->get();
+    // return response()->json($clients);
+    }
+
+    public function list()
+    {
         $clients = Client::with("vehicle")->orderBy('id', 'DESC')->get();
     return response()->json($clients);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -61,7 +68,8 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        return response()->json($client);
     }
 
     /**
@@ -84,7 +92,10 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $client->update($request->all());
+
+        return response()->json(['message' => 'Cliente actualizado correctamente']);
     }
 
     /**
@@ -95,6 +106,12 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $client = Client::findOrFail($id);
+            $client->delete();
+            return response()->json(['message' => 'Cliente eliminado exitosamente'], 200);
+                } catch (\Exception $e) {
+                    return response()->json(['message' => 'Error al eliminar el cliente', 'error' => $e->getMessage()], 500);
+                }
     }
 }
