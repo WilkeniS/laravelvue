@@ -44,15 +44,15 @@ export default {
     }
   },
   methods: {
-    findVehicle(){
-      this.$inertia.get('/vehicles?search=', this.search)
-        .then(response => {
-          this.vehicles = response.data;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
+    // findVehicle(){
+    //   this.$inertia.get('/vehicles?search=', this.search)
+    //     .then(response => {
+    //       this.vehicles = response.data;
+    //     })
+    //     .catch(error => {
+    //       console.error('Error:', error);
+    //     });
+    // }
   }
 };
 </script>
