@@ -11,22 +11,12 @@
         <li class="nav-item">
           <router-link exact-active-class="active" to="/" class="nav-link active" aria-current="page">Inicio</router-link>
         </li>
-        <!-- <li class="nav-item">
-          <router-link exact-active-class="active" to="/create" class="nav-link active" aria-current="page">Create</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link exact-active-class="active" to="/:id" class="nav-link active" aria-current="page">Edit</router-link>
-        </li> -->
         <li class="nav-item">
           <router-link exact-active-class="active" to="/clients" class="nav-link active" aria-current="page">Clients</router-link>
         </li>
       </ul>
       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-      </form>
-      <form class="d-flex" role="search" method="GET">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit" >Search</button>
       </form>
     </div>
   </div>
@@ -39,3 +29,33 @@
 <script>
     export default {}
 </script>
+<style scoped>
+@media (max-width: 792px) {
+  .navbar,
+  .navbar-collapse {
+    flex-direction: column;
+  }
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar {
+    width: auto; /* Cambiado a auto para que ocupe el ancho necesario */
+    height: 100vh;
+    align-items: flex-start;
+    position: fixed; /* Añadido para mantener el navbar fijo */
+    top: 0; /* Añadido para asegurar que el navbar se mantenga en la parte superior */
+    left: 0; /* Añadido para que el navbar esté en el lado izquierdo */
+    z-index: 1000; /* Añadido para asegurar que esté por encima del contenido */
+    background-color: #333; /* Cambiado el color de fondo para mayor contraste */
+    padding: 15px; /* Añadido para dar espacio al contenido dentro del navbar */
+  }
+  .navbar-brand {
+    margin-left: 0.5em;
+    padding-bottom: 0;
+    border-bottom: 4px solid #464646;
+  }
+  form input {
+    margin-bottom: 0.7em;
+  }
+}
+</style>
