@@ -11,7 +11,7 @@ class Vehicle extends Model
     use HasFactory;
     protected $table = 'vehicles';
     public $timestamps = false;         
-    protected $fillable = ['brand'];
+    protected $fillable = ['brand', 'year'];
     protected $primary_key="id";
 
     public function client()

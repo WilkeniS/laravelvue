@@ -4,7 +4,7 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-4">
         <router-link :to="{ name: 'CreateClients' }" class="btn btn-success hide ms-2"><ion-icon name="add-circle" size="small"></ion-icon></router-Link>
         <button @click="printTable" class="btn btn-dark hide ms-2"><ion-icon name="print" size="small"></ion-icon></button>
-        <button @click="refreshPage" class="btn btn-primary ms-2"><ion-icon name="refresh-circle" size="small"></ion-icon></button>
+        <button @click="fetchDataFromDatabase" class="btn btn-primary ms-2 hide"><ion-icon name="refresh-circle" size="small"></ion-icon></button>
       </div>
     </div>
     <div class="col-12">

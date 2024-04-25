@@ -21,9 +21,20 @@
   .hide{
     display: none;
   }
+
+  h1.print-only{
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }
 
 // table
 .button-cell{
     width: 150px;
 }
+h1{
+  display: none;
+}
+
+

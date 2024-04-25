@@ -14,10 +14,10 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" v-model="client.vehicle_id"></textarea>
+                                    <input class="form-control" v-model="client.vehicle_id">
                                     <label for="year">Vehicle Id</label>
                                 </div>
-                                <div class="error-message" v-if="invalidYear">Invalid id. Please enter a valid id.</div>
+                                <!-- <div class="error-message" v-if="invalidId">Invalid id. Please enter a valid id.</div> -->
                             </div>
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary">Submit</button>

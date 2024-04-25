@@ -95,12 +95,18 @@ class VehiclesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Vehicle $vehicle)
     {
-        $vehicle = Vehicle::findOrFail($id);
+        try {
+        // Actualiza el vehículo con los datos de la solicitud
         $vehicle->update($request->all());
 
+        // Retorna una respuesta indicando que el vehículo fue actualizado correctamente
         return response()->json(['message' => 'Vehículo actualizado correctamente']);
+    } catch (\Exception $e) {
+        // Retorna una respuesta de error
+        return response()->json(['message' => 'Error al actualizar el vehículo', 'error' => $e->getMessage()], 500);
+    }
     }
 
     /**

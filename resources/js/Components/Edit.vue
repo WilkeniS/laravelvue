@@ -14,8 +14,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" v-model="vehicle.year"></textarea>
-                                    <label for="year">Year</label>
+                                    <input type="text" class="form-control" v-model="vehicle.year">                                    <label for="year">Year</label>
                                 </div>
                                 <div class="error-message" v-if="invalidYear">Invalid year. Please enter a valid year.</div>
                             </div>
@@ -59,9 +58,11 @@ export default {
             }
         },
         validateYear(year) {
-            const parsedYear = parseInt(year);
-            return !isNaN(parsedYear) && parsedYear >= 1900 && parsedYear <= new Date().getFullYear();
-        },
+        const parsedYear = parseInt(year);
+    if (isNaN(parsedYear)) {
+    }
+    return parsedYear >= 1900 && parsedYear <= new Date().getFullYear();
+},
         async edit() {
             // Validación del año
             if (!this.validateYear(this.vehicle.year)) {
@@ -72,10 +73,14 @@ export default {
             }
 
             try {
-                await axios.put(`vehicles/${this.$route.params.id}`, {
+                console.log("Sending PUT request...");
+                console.log("Data to be sent:", {
                     brand: this.vehicle.brand,
                     year: this.vehicle.year
-                });
+                 });
+
+                await axios.put(`vehicles/${this.$route.params.id}`, this.vehicle);
+                console.log("PUT request successful.");
                 this.$router.push({ name: "showVehicle" });
             } catch (error) {
                 console.error("Error updating vehicle:", error);
